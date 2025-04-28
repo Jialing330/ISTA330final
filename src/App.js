@@ -4,8 +4,10 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import CharacterPage from './pages/CharacterPage';
 import SeasonPage from './pages/SeasonPage';
-import FourSeasonChecklist from './pages/FourSeasonChecklist';
 import NotFound from './pages/NotFound';
+import Settings from './pages/Settings';
+
+
 
 
 function App() {
@@ -18,8 +20,9 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/character/:id" element={<CharacterPage />} />
         <Route path="/season/:seasonName" element={<SeasonPage />} />
-        <Route path="/checklist/all-seasons" element={<FourSeasonChecklist />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/settings" element={<Settings />} />
+
       </Routes>
     </Router>
   );

@@ -1,35 +1,26 @@
 .character-page {
-    padding: 40px;
-    background-color: #fefae0;
-    font-family: 'Courier New', monospace;
-  }
-  
-  .bundles {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  
-  .bundle {
-    border: 3px solid #8B5A2B;
-    background-color: #fffdf5;
-    padding: 20px;
-    width: 280px;
-    border-radius: 10px;
-    box-shadow: 4px 4px #ccc;
-  }
-  
-  .bundle h2 {
-    color: #5D4037;
-    margin-bottom: 10px;
-  }
-  
-  .bundle ul {
-    list-style: none;
-    padding-left: 0;
-  }
-  
-  .bundle li {
-    margin-bottom: 8px;
-  }
-  
+  padding: 40px;
+  font-family: 'Courier New', monospace;
+  background-color: #fdf6e3;
+}
+
+.bundle {
+  background-color: #fffdf0;
+  border: 2px solid #c5b58a;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.bundle h2 {
+  margin-bottom: 10px;
+}
+
+.bundle ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.bundle li {
+  margin-bottom: 8px;
+}

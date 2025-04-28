@@ -1,0 +1,52 @@
+.settings-container {
+  padding: 20px;
+  font-family: 'Courier New', monospace;
+  background-color: #fefae0;
+  min-height: 100vh;
+}
+
+.bundle-box, .characters-box {
+  margin-top: 20px;
+  padding: 20px;
+  border: 2px solid #d4a373;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.add-character-form {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+input {
+  padding: 6px;
+  font-size: 14px;
+}
+
+button {
+  background-color: #d4a373;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #b57640;
+}
+
+.error-text {
+  color: red;
+  margin-top: 5px;
+}
+
+.back-button {
+  margin-top: 10px;
+  background: none;
+  border: none;
+  color: #444;
+  cursor: pointer;
+  font-size: 14px;
+}

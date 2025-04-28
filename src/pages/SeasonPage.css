@@ -1,44 +1,26 @@
-.season-overview {
-    min-height: 100vh;
-    padding: 40px;
-    background-color: #fffbe8;
-    font-family: 'Courier New', monospace;
-  }
-  
-  .season-grid {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  
-  .season-card {
-    background-color: #fffdf5;
-    border: 3px solid #8B5A2B;
-    border-radius: 10px;
-    padding: 20px;
-    width: 220px;
-    text-align: center;
-    text-decoration: none;
-    color: #4e342e;
-    box-shadow: 4px 4px #ccc;
-    transition: transform 0.2s;
-  }
-  
-  .season-card:hover {
-    transform: scale(1.04);
-  }
-  
-  .progress-bar {
-    background-color: #ddd;
-    border-radius: 8px;
-    height: 18px;
-    margin: 10px 0;
-  }
-  
-  .progress {
-    background-color: #6B8E23;
-    height: 100%;
-    border-radius: 8px;
-  }
-  
+.season-page {
+  padding: 40px;
+  font-family: 'Courier New', monospace;
+  background-color: #fdf6e3;
+}
+
+.season-page ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 20px;
+}
+
+.season-page li {
+  margin-bottom: 10px;
+}
+
+.character-select {
+  margin: 20px 0;
+  font-size: 16px;
+}
+
+.character-select select {
+  margin-left: 10px;
+  padding: 4px;
+  font-family: inherit;
+}

@@ -1,41 +1,36 @@
-.home-container {
-    min-height: 100vh;
+.home-page {
     padding: 40px;
-    background: #fefae0;
+    background-color: #fffef2;
     font-family: 'Courier New', monospace;
   }
   
-  .character-list {
+  .card-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    margin-top: 20px;
   }
   
-  .character-card {
-    background-color: #fffdf5;
-    border: 3px solid #8B5A2B;
+  .farm-card {
+    background-color: #fffbe6;
+    border: 2px solid #c5b58a;
+    padding: 16px;
     border-radius: 10px;
-    padding: 20px;
-    width: 250px;
-    box-shadow: 4px 4px #ccc;
+    width: 220px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.15);
     text-align: center;
   }
   
-  .character-card h2 {
-    margin-bottom: 10px;
-    color: #4e342e;
-  }
-  
   .progress-bar {
+    height: 10px;
     background-color: #ddd;
-    border-radius: 8px;
-    height: 20px;
+    border-radius: 6px;
+    overflow: hidden;
     margin: 10px 0;
   }
   
   .progress {
-    background-color: #6B8E23;
     height: 100%;
-    border-radius: 8px;
+    background-color: #7ebc59;
   }
   

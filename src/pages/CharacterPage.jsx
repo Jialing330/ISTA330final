@@ -1,68 +1,187 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import Navbar from '../components/Navbar';
+import { checklistData, seasonBundles } from '../data/checklistData';
 import './CharacterPage.css';
 
-const mockBundles = [
-  {
-    name: 'Crafts Room',
-    tasks: ['Spring Foraging', 'Summer Foraging', 'Fall Foraging', 'Winter Foraging']
-  },
-  {
-    name: 'Pantry',
-    tasks: ['Spring Crops', 'Summer Crops', 'Fall Crops', 'Animal Bundle']
-  },
-  {
-    name: 'Fish Tank',
-    tasks: ['River Fish', 'Ocean Fish', 'Night Fishing', 'Lake Fish']
-  }
-];
-
 export default function CharacterPage() {
-  const { id } = useParams(); 
+  const { characterName } = useParams();
   const navigate = useNavigate();
+  const [allChecklist, setAllChecklist] = useState({});
+  const [season, setSeason] = useState('spring');
+  const [seasonChecklist, setSeasonChecklist] = useState({});
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
-  const [checked, setChecked] = useState({});
+  useEffect(() => {
+    if (!currentUser) return;
+    fetchAllChecklist();
+    fetchSeasonChecklist(season);
+  }, [characterName, season]);
 
-  const handleCheck = (bundleName, taskName) => {
-    const key = `${bundleName}-${taskName}`;
-    setChecked((prev) => ({ ...prev, [key]: !prev[key] }));
+  const fetchAllChecklist = async () => {
+    try {
+      const res = await fetch(`http://localhost:8888/api/checklist/load?userId=${currentUser.id}&character=${characterName}&season=AllChecklist`);
+      const data = await res.json();
+      const loaded = {};
+      if (data.items) {
+        data.items.forEach(item => {
+          loaded[item.name] = item.checked;
+        });
+      }
+      setAllChecklist(loaded);
+    } catch (err) {
+      console.error('❌ AllChecklist cannot processing:', err);
+    }
   };
 
-  const totalTasks = mockBundles.reduce((sum, b) => sum + b.tasks.length, 0);
-  const completedTasks = Object.values(checked).filter(Boolean).length;
-  const progress = Math.round((completedTasks / totalTasks) * 100);
+  const fetchSeasonChecklist = async (selectedSeason) => {
+    try {
+      const res = await fetch(`http://localhost:8888/api/checklist/load?userId=${currentUser.id}&character=${characterName}&season=${selectedSeason}`);
+      const data = await res.json();
+      const loaded = {};
+      if (data.items) {
+        data.items.forEach(item => {
+          loaded[item.name] = item.checked;
+        });
+      }
+      setSeasonChecklist(loaded);
+    } catch (err) {
+      console.error('❌ SeasonChecklist cannot processing:', err);
+    }
+  };
+
+  const handleAllChecklistChange = async (itemName) => {
+    const updated = { ...allChecklist, [itemName]: !allChecklist[itemName] };
+    setAllChecklist(updated);
+
+    try {
+      const formattedItems = Object.keys(updated).map(name => ({
+        name,
+        checked: updated[name],
+      }));
+
+      await fetch('http://localhost:8888/api/checklist/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId: currentUser.id,
+          character: characterName,
+          season: 'AllChecklist',
+          items: formattedItems,
+        }),
+      });
+    } catch (err) {
+      console.error('❌ Save AllChecklist error:', err);
+    }
+  };
+
+  const handleSeasonChecklistChange = async (itemName) => {
+    const updated = { ...seasonChecklist, [itemName]: !seasonChecklist[itemName] };
+    setSeasonChecklist(updated);
+
+    const updatedAll = { ...allChecklist, [itemName]: !allChecklist[itemName] };
+    setAllChecklist(updatedAll);
+
+    try {
+      const seasonItems = Object.keys(updated).map(name => ({
+        name,
+        checked: updated[name],
+      }));
+
+      const allItems = Object.keys(updatedAll).map(name => ({
+        name,
+        checked: updatedAll[name],
+      }));
+
+      await fetch('http://localhost:8888/api/checklist/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId: currentUser.id,
+          character: characterName,
+          season: season,
+          items: seasonItems,
+        }),
+      });
+
+      await fetch('http://localhost:8888/api/checklist/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId: currentUser.id,
+          character: characterName,
+          season: 'AllChecklist',
+          items: allItems,
+        }),
+      });
+    } catch (err) {
+      console.error('❌ Save SeasonChecklist or AllChecklist error:', err);
+    }
+  };
+
+  const handleSeasonChange = (newSeason) => {
+    setSeason(newSeason);
+  };
+
+  if (!currentUser) return null;
 
   return (
-    <div className="character-page">
-      <h1>🧺 Character: {id}</h1>
-      <p>{progress}% Completed</p>
+    <>
+      <Navbar />
+      <div className="character-page">
+        <h1>🧹 Character Checklist: {characterName}</h1>
 
-      <div className="bundles">
-        {mockBundles.map((bundle) => (
-          <div className="bundle" key={bundle.name}>
-            <h2>{bundle.name}</h2>
-            <ul>
-              {bundle.tasks.map((task) => {
-                const key = `${bundle.name}-${task}`;
-                return (
-                  <li key={key}>
-                    <label>
-                      <input
-                        type="checkbox"
-                        checked={!!checked[key]}
-                        onChange={() => handleCheck(bundle.name, task)}
-                      />
-                      {task}
-                    </label>
+        <h2>Overall Progress</h2>
+        <div className="checklist-section">
+          {Object.keys(checklistData).map(room => (
+            <div key={room} className="room-section">
+              <h3>{room}</h3>
+              <ul>
+                {checklistData[room].map(item => (
+                  <li key={item}>
+                    <input
+                      type="checkbox"
+                      checked={allChecklist[item] || false}
+                      onChange={() => handleAllChecklistChange(item)}
+                    />
+                    {item}
                   </li>
-                );
-              })}
-            </ul>
-          </div>
-        ))}
-      </div>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
 
-      <button onClick={() => navigate('/home')}>← Back to Home</button>
-    </div>
+        <button onClick={() => navigate('/home')}> ← Back to Home</button>
+
+        <h2>🌿 Seasonal Checklists</h2>
+        <div className="season-buttons">
+          {['spring', 'summer', 'fall', 'winter'].map(s => (
+            <button
+              key={s}
+              onClick={() => handleSeasonChange(s)}
+              style={{ margin: '0 5px' }}
+            >
+              {s.charAt(0).toUpperCase() + s.slice(1)}
+            </button>
+          ))}
+        </div>
+
+        <div className="season-checklist">
+          <ul>
+            {seasonBundles[season]?.map(bundle => (
+              <li key={bundle.task}>
+                <input
+                  type="checkbox"
+                  checked={seasonChecklist[bundle.task] || false}
+                  onChange={() => handleSeasonChecklistChange(bundle.task)}
+                />
+                {bundle.task} ({bundle.bundle})
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </>
   );
 }
