@@ -66,7 +66,22 @@ export default function Settings() {
       <Navbar />
       <div className="settings-container">
         <button className="back-btn" onClick={() => navigate('/home')}>← Back to Home</button>
-        <h1 className="settings-title">🛠 Settings</h1>
+        <h1 className="settings-title">
+          <img 
+            src="/images/Optionstab.png" 
+            alt="Settings Icon" 
+            style={{ width: '28px', height: '28px', verticalAlign: 'middle', marginRight: '10px' }}
+          />
+          Settings
+        </h1>
+
+        <img 
+          src="/images/400px-Getting_Started_-_Wiki.png" 
+          alt="Stardew Valley Banner" 
+          className="settings-banner"
+        />
+
+
 
         <div className="settings-section">
           <h2>📦 Bundle Type</h2>

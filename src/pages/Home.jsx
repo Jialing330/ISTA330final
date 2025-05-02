@@ -54,7 +54,11 @@ export default function Home() {
     <>
       <Navbar />
       <div className="home-page">
-        <h1>Welcome to the Community Center!</h1>
+      <h1 className="center-title">
+        <img src="/images/Banner_Right.png" alt="Community Center Icon" className="center-icon" />
+        Welcome to the Community Center!
+      </h1>
+
         <div className="card-container">
           {characters.map((char) => {
             const completion = progressData[char.name] || 0;

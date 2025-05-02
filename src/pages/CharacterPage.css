@@ -1,11 +1,11 @@
 .character-page {
   padding: 40px;
   font-family: 'Courier New', monospace;
-  background-color: #fdf6e3;
+  /* ✨ 去掉背景色，让背景图显示出来 */
 }
 
 .bundle {
-  background-color: #fffdf0;
+  background-color: rgba(255, 253, 240, 0.9); /* ✨ 半透明背景，让背景图微微透出 */
   border: 2px solid #c5b58a;
   border-radius: 10px;
   padding: 20px;
@@ -23,4 +23,67 @@
 
 .bundle li {
   margin-bottom: 8px;
+}
+
+.seasonal-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+  font-size: 24px;
+}
+
+.seasonal-icon {
+  width: 28px;
+  height: auto;
+}
+
+.season-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 15px;
+  flex-wrap: wrap; /* ✨ 如果空间小可以换行 */
+}
+
+.season-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.season-btn.spring {
+  background-color: #d4edda;
+  border-color: #a3cfbb;
+  color: #2d5c3a;
+}
+.season-btn.summer {
+  background-color: #fff3cd;
+  border-color: #ffe69c;
+  color: #8a6d1d;
+}
+.season-btn.fall {
+  background-color: #f8d7da;
+  border-color: #f5c2c7;
+  color: #7b3f00;
+}
+.season-btn.winter {
+  background-color: #d1ecf1;
+  border-color: #bee5eb;
+  color: #2e5c72;
+}
+
+.season-btn:hover {
+  transform: scale(1.05); /* ✨ 加个小放大效果 */
+}
+
+.season-btn-icon {
+  width: 20px;
+  height: 20px;
 }

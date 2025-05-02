@@ -129,7 +129,7 @@ export default function CharacterPage() {
     <>
       <Navbar />
       <div className="character-page">
-        <h1>🧹 Character Checklist: {characterName}</h1>
+        <h1>🧹 Character Checklist {characterName}</h1>
 
         <h2>Overall Progress</h2>
         <div className="checklist-section">
@@ -154,18 +154,28 @@ export default function CharacterPage() {
 
         <button onClick={() => navigate('/home')}> ← Back to Home</button>
 
-        <h2>🌿 Seasonal Checklists</h2>
+        <h2 className="seasonal-title">
+          <img src="/images/All_Seasons_Icon.png" alt="All Seasons Icon" className="seasonal-icon" />
+          Seasonal Checklists
+        </h2>
+
         <div className="season-buttons">
           {['spring', 'summer', 'fall', 'winter'].map(s => (
             <button
-              key={s}
-              onClick={() => handleSeasonChange(s)}
-              style={{ margin: '0 5px' }}
-            >
+            key={s}
+            className={`season-btn ${s} ${season === s ? 'active' : ''}`}
+            onClick={() => handleSeasonChange(s)}
+            >          
+              <img
+                src={`/images/24px-${s.charAt(0).toUpperCase() + s.slice(1)}.png`}
+                alt={`${s} icon`}
+                className="season-btn-icon"
+              />
               {s.charAt(0).toUpperCase() + s.slice(1)}
             </button>
           ))}
         </div>
+
 
         <div className="season-checklist">
           <ul>

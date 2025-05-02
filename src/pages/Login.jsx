@@ -44,6 +44,7 @@ export default function Login() {
 
   return (
     <div className="form-container">
+      <img src="/images/Main_Logo.png" alt="Stardew Valley Logo" className="logo" />
       <h2>Welcome Back, Adventurer</h2>
       <input
         type="email"

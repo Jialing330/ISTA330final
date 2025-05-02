@@ -34,3 +34,25 @@
     background-color: #7ebc59;
   }
   
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+  }
+
+  .center-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 40px;
+    font-size: 44px;
+  }
+
+  .center-icon {
+    width: 150px;
+    height: auto;
+    vertical-align: middle;
+  }
+

@@ -33,6 +33,7 @@ export default function Register() {
 
   return (
     <div className="form-container">
+      <img src="/images/Main_Logo.png" alt="Stardew Valley Logo" className="logo" />
       <h2>Join the Community Center!</h2>
       <input
         type="email"

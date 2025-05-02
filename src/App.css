@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-image: url('/images/24px-Fall.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  font-family: 'Courier New', monospace;
+}
+
